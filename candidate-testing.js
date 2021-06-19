@@ -23,15 +23,19 @@ console.log("Hello, " + candidateName + ".");
 
 function askQuestion() {
   // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
-
-
+let candidateAnswer = input.question("Who was the first American woman in space? ");
+console.log("You answered " + candidateAnswer);
 }
 
 function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-
-
+let correctAnswer = ("Sally Ride");
+if (candidateAnswer === correctAnswer) {
+  console.log("Correct! Sally Ride was the first American woman in space.");
+} else {
+  console.log("Sorry, that is incorrect. Sally Ride was the first American woman in space.");
+}
   let grade;
   
 
