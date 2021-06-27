@@ -16,25 +16,31 @@ let questions = [
 "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ",
 "What is the minimum crew size for the ISS? "
 ];
-let correctAnswers = ["Sally Ride",
+let correctAnswers = [
+  "Sally Ride",
 "true",
 "40",
 "Trajectory",
-"3"];
+"3"
+];
 let candidateAnswers = [];
 let candidateCorrectAnswers = [];
+let grade = '';
+let candidateStatus = "";
 
 
-function askForName() {
+function askForName(candidateName) {
   // TODO 1.1b: Ask for candidate's name //
 candidateName =  input.question("What is your name? ");
-console.log("Hello, " + candidateName + ". Welcome to the initial screening test. Please remember that answers are case sensitive.");
-return candidateName
+console.log("Hello, " + candidateName + ". Welcome to the initial screening test.");
+return candidateName;
 }
 
 function askQuestion() {
   // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
-candidateAnswers = input.question();
+for (let i = 0; i < questions.length; i++) {
+  candidateAnswers.push(input.question(questions[i]));
+}
 return candidateAnswers;
 }
 
@@ -42,58 +48,33 @@ function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
 for (let i = 0; i < questions.length; i++) {
-  if (candidateAnswers[i] === correctAnswers[i]){
-    candidateCorrectAnswers.push(candidateAnswers)
+  if (candidateAnswers[i].toUpperCase === correctAnswers[i].toUpperCase) {
+    candidateCorrectAnswers.push(candidateAnswers);
   }
-
 }
-let grade = ((candidateCorrectAnswers.length) / (correctAnswers.length)) * 100;
+grade = ((candidateCorrectAnswers.length) / (correctAnswers.length)) * 100;
+console.log(grade);
 return grade;
 }
 
-function runProgram() {
-  // TODO 1.1c: Ask for candidate's name //
-askForName();
-for (let i = 0; i < questions.length; i++) {
-  candidateAnswers = askQuestion(questions[i]);
-}
-gradeQuiz(this.candidateAnswers);
-}
-
-runProgram;
-
-let candidateStatus = "";
+function passOrFail(grade) {
 if (grade >= 80){
   candidateStatus = "PASSED";
   } else {
     candidateStatus = "FAILED";
   }
+return candidateStatus  
+}
 
-console.log(
-"Candidate Name: " + candidateName "\n"
-"1) " + questions[1]\n
-"Your Answer: " + candidateAnswers[1]\n
-"Correct Answer: " + correctAnswers [1]\n
-\n
-"2) " + questions[2]\n
-"Your Answer: " + candidateAnswers[2]\n
-"Correct Answer: " + correctAnswers [2]\n
-\n
-"3) " + questions[3]\n
-"Your Answer: " + candidateAnswers[3]\n
-"Correct Answer: " + correctAnswers [3]\n
-\n
-"4) " + questions[4]\n
-"Your Answer: " + candidateAnswers[4]\n
-"Correct Answer: " + correctAnswers[4]"\n"
-\n
-"5) " + questions[5]\n
-"Your Answer: " + candidateAnswers[5]\n
-"Correct Answer: " + correctAnswers [5]\n
-\n
-">>> Overall Grade: " + grade + "% (" + (candidateCorrectAnswers.length) " of " + (correctAnswers.length) " responses correct) <<<"\n
-">>> Status: " + candidateStatus + " <<<)"
-)
+function runProgram() {
+  // TODO 1.1c: Ask for candidate's name //
+askForName(candidateName);
+askQuestion();
+gradeQuiz(this.candidateAnswers);
+passOrFail(grade);
+console.log(">>> Overall Grade: " + grade + "% <<<");
+console.log(">>> Status: " + candidateStatus + " <<<");
+}
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
