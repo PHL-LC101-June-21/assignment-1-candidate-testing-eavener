@@ -48,10 +48,11 @@ function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
 for (let i = 0; i < questions.length; i++) {
-  if (candidateAnswers[i].toUpperCase === correctAnswers[i].toUpperCase) {
+  if (candidateAnswers[i].toUpperCase() === correctAnswers[i].toUpperCase()) {
     candidateCorrectAnswers.push(candidateAnswers);
   }
 }
+console.log(candidateCorrectAnswers.length+"correct answers")
 grade = ((candidateCorrectAnswers.length) / (correctAnswers.length)) * 100;
 console.log(grade);
 return grade;
